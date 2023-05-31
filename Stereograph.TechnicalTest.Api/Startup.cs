@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 
 using Stereograph.TechnicalTest.Api.Models;
 using System;
+using System.IO;
 
 namespace Stereograph.TechnicalTest.Api;
 
@@ -22,10 +23,15 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        IConfiguration configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
+
         services.AddDbContext<ApplicationDbContext>(options =>
         {
             options
-                .UseSqlite("Data Source=testtechnique.db")
+                .UseSqlite(configuration.GetConnectionString("DefaultConnection"))
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors();
         });
