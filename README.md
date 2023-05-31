@@ -22,7 +22,7 @@
 >
 >   Pour lancer la migration et appliquer ses modifications (et donc créer la table `Person`).
 
-### ` HEAD`
+### ` 8e8017f`
 
 > J’ajoute ce fichier que je tiendrai à jour au cours de mon exercice.
 >
@@ -35,3 +35,12 @@
 > - un POST pour créer une personne
 >
 > Elles ont l’air de bien fonctionner quand testées sur le Swagger à la main.
+
+### `HEAD`
+
+> J’ajoute les routes suivantes au `PersonController` :
+>
+> - un PUT pour mettre à jour les infos d’une personne
+> - un DELETE pour supprimer une personne
+>
+> J’ai aussi réparé la méthode POST (de création) car l’appel `CreatedAtAction` avait un paramètre invalide, ce qui faisait planter la méthode après la création de l’objet, nous empêchant d’avoir un retour propre.
