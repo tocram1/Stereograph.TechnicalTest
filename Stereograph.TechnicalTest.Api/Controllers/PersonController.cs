@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.IO;
+using Microsoft.OpenApi.Any;
 
 namespace Stereograph.TechnicalTest.Api.Controllers;
 
@@ -92,27 +93,42 @@ public class PersonController : ControllerBase
     [HttpPost("import")]
     public ActionResult ImportCSV(IFormFile p_File)
     {
+        // Vérifications
         if (p_File is null || p_File.Length <= 0)
             return BadRequest("No file uploaded.");
 
-        using (StreamReader v_Reader = new(p_File.OpenReadStream()))
-        using (CsvReader v_Csv = new(v_Reader, CultureInfo.InvariantCulture))
-        {
-            v_Csv.Context.RegisterClassMap<PersonMap>();
-            IEnumerable<Person> v_People;
-            try
-            {
-                v_People = v_Csv.GetRecords<Person>().ToList<Person>();
-            }
-            catch
-            {
-                return BadRequest("CSV file is corrupted or bad column names.");
-            }
+        // Préparation de la lecture et du mapping
+        using StreamReader v_Reader = new(p_File.OpenReadStream());
+        using CsvReader v_Csv = new(v_Reader, CultureInfo.InvariantCulture);
+        v_Csv.Context.RegisterClassMap<PersonMap>();
 
-            m_DbContext.People.AddRange(v_People);
-            m_DbContext.SaveChanges();
+        // Lecture des lignes
+        IEnumerable<Person> v_People;
+        try
+        {
+            v_People = v_Csv.GetRecords<Person>();
+        }
+        catch
+        {
+            return BadRequest("CSV file is corrupted or bad column names.");
         }
 
-        return Ok("CSV file imported successfully.");
+        // Ne pas ajouter les duplicatas (en considérant les adreses e-mail uniques)...
+        v_People = v_People.Where(p =>
+            !m_DbContext.People.Any(p2 => p.Email == p2.Email)
+        ).ToList();
+
+        // Ajout des données uniques trouvées et retour
+        if (v_People.Any())
+        {
+            m_DbContext.People.AddRange(v_People);
+            m_DbContext.SaveChanges();
+
+            return Ok($"CSV file imported successfully ({v_People.Count()} people added).");
+        }
+        else
+        {
+            return Ok("All users in the CSV file already exist.");
+        }
     }
 }

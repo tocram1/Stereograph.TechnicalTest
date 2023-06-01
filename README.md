@@ -22,7 +22,7 @@
 >
 >   Pour lancer la migration et appliquer ses modifications (et donc créer la table `Person`).
 
-### ` 8e8017f`
+### `8e8017f`
 
 > J’ajoute ce fichier que je tiendrai à jour au cours de mon exercice.
 >
@@ -45,10 +45,18 @@
 >
 > J’ai aussi réparé la méthode POST (de création) car l’appel `CreatedAtAction` avait un paramètre invalide, ce qui faisait planter la méthode après la création de l’objet, nous empêchant d’avoir un retour propre.
 
-### ` HEAD`
+### `d5aa6fe`
 
 > J’ai rajouté une classe de mapping `PersonMap` dans mon modèle `Person` pour proprement récupérer et stocker les infos du fichier CSV avec CsvHelper.
 >
 > Ensuite, j’ai rédigé la méthode POST `ImportCSV` qui prend en paramètre un fichier de données CSV. Je l’utilise pour lire et stocker en base les données du fichier importé.
 >
 > J’ai mis quelques sécurités classiques comme la gestion du cas où des données manquent dans les headers du CSV (si une colonne est manquante ou mal nommée).
+
+### `HEAD`
+
+> J’ai constitué quelques fichiers CSV de test de situations problématiques ou non.
+>
+> Ensuite, j’ai modifié ma méthode `ImportCSV` pour éviter d’ajouter des personnes déjà existantes dans la base en utilisant leur adresse e-mail comme attribut unique. Je pense qu’en utilisant quelque-chose comme un `HashSet<Person>`, il aurait été possible de s’éviter du LINQ qui pourrait prendre un peu de temps sur un éventuel import massif.
+>
+> Il pourrait aussi être possible, si besoin, de mettre à jour les personnes déjà existantes plutôt que de simplement les ignorer.
