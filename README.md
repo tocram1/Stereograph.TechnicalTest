@@ -36,7 +36,7 @@
 >
 > Elles ont l’air de bien fonctionner quand testées sur le Swagger à la main.
 
-### `HEAD`
+### `d57937f`
 
 > J’ajoute les routes suivantes au `PersonController` :
 >
@@ -44,3 +44,11 @@
 > - un DELETE pour supprimer une personne
 >
 > J’ai aussi réparé la méthode POST (de création) car l’appel `CreatedAtAction` avait un paramètre invalide, ce qui faisait planter la méthode après la création de l’objet, nous empêchant d’avoir un retour propre.
+
+### ` HEAD`
+
+> J’ai rajouté une classe de mapping `PersonMap` dans mon modèle `Person` pour proprement récupérer et stocker les infos du fichier CSV avec CsvHelper.
+>
+> Ensuite, j’ai rédigé la méthode POST `ImportCSV` qui prend en paramètre un fichier de données CSV. Je l’utilise pour lire et stocker en base les données du fichier importé.
+>
+> J’ai mis quelques sécurités classiques comme la gestion du cas où des données manquent dans les headers du CSV (si une colonne est manquante ou mal nommée).

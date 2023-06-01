@@ -3,6 +3,11 @@ using Stereograph.TechnicalTest.Api.Entities;
 using Stereograph.TechnicalTest.Api.Models;
 using System.Collections.Generic;
 using System.Linq;
+using CsvHelper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using System.IO;
 
 namespace Stereograph.TechnicalTest.Api.Controllers;
 
@@ -83,4 +88,31 @@ public class PersonController : ControllerBase
         return NoContent();
     }
 
+    // POST api/people/import
+    [HttpPost("import")]
+    public ActionResult ImportCSV(IFormFile p_File)
+    {
+        if (p_File is null || p_File.Length <= 0)
+            return BadRequest("No file uploaded.");
+
+        using (StreamReader v_Reader = new(p_File.OpenReadStream()))
+        using (CsvReader v_Csv = new(v_Reader, CultureInfo.InvariantCulture))
+        {
+            v_Csv.Context.RegisterClassMap<PersonMap>();
+            IEnumerable<Person> v_People;
+            try
+            {
+                v_People = v_Csv.GetRecords<Person>().ToList<Person>();
+            }
+            catch
+            {
+                return BadRequest("CSV file is corrupted or bad column names.");
+            }
+
+            m_DbContext.People.AddRange(v_People);
+            m_DbContext.SaveChanges();
+        }
+
+        return Ok("CSV file imported successfully.");
+    }
 }
