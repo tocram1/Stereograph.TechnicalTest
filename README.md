@@ -67,6 +67,12 @@
 >
 > Je n’ai eu le temps que pour le test de l’ajout et de la mise à jour d’entités. J’aurais pu faire plus mais j’avais déjà pris un peu trop de temps à mon goût.
 
-### `HEAD`
+### `7d5e277`
 
 > Un coup de `CodeMaid` pour nettoyer les usages inutilisés, les lignes sautées en trop…
+
+## Difficultés rencontrées
+
+La plus grande difficulté pour moi a été de me remettre dans l’ASP.NET et dans l’architecture d’un projet d’API étant-donné que cela faisait quelques temps que j’en n’avais pas «bâti de zéro». Avec un peu d’aide d’internet et de la documentation, j’ai pu prendre mes repères.
+
+C’était un peu de même avec les tests; j’avais des soucis avec les types des fonctions et leur retour.
