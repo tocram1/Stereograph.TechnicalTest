@@ -61,8 +61,12 @@
 >
 > Il pourrait aussi être possible, si besoin, de mettre à jour les personnes déjà existantes plutôt que de simplement les ignorer.
 
-### `HEAD`
+### `a206b82`
 
 > J’ai voulu mettre des tests en place. Pour cela, j’ai gardé le classique `XUnit` déjà installé dans le squelette de projet, mais aussi rajouté `Bogus` pour générer des données aléatoires à insérer en base pendant les tests, et `Microsoft.EntityFrameworkCore.InMemory` pour pouvoir gérer la base de données plus facilement pendant les tests (et nous éviter de devoir gérer une autre base SQLite pour les tests).
 >
 > Je n’ai eu le temps que pour le test de l’ajout et de la mise à jour d’entités. J’aurais pu faire plus mais j’avais déjà pris un peu trop de temps à mon goût.
+
+### `HEAD`
+
+> Un coup de `CodeMaid` pour nettoyer les usages inutilisés, les lignes sautées en trop…

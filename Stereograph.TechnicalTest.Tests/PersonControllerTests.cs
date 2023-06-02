@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Stereograph.TechnicalTest.Api.Controllers;
 using Stereograph.TechnicalTest.Api.Entities;
-using Person = Stereograph.TechnicalTest.Api.Models.Person;
 using Xunit;
-using Bogus.DataSets;
+using Person = Stereograph.TechnicalTest.Api.Models.Person;
 
 namespace Stereograph.TechnicalTest.Tests;
 

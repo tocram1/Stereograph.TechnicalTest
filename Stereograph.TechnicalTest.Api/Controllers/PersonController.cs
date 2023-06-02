@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CsvHelper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Stereograph.TechnicalTest.Api.Entities;
 using Stereograph.TechnicalTest.Api.Models;
 using System.Collections.Generic;
-using System.Linq;
-using CsvHelper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.IO;
-using Microsoft.OpenApi.Any;
+using System.Linq;
 
 namespace Stereograph.TechnicalTest.Api.Controllers;
 
@@ -52,7 +50,6 @@ public class PersonController : ControllerBase
 
         return CreatedAtAction(nameof(GetPerson), new { p_Id = p_Person.Id }, p_Person);
     }
-
 
     // PUT api/people/{p_Id}
     [HttpPut("{p_Id}")]
