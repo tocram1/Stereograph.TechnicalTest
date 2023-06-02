@@ -53,10 +53,16 @@
 >
 > J’ai mis quelques sécurités classiques comme la gestion du cas où des données manquent dans les headers du CSV (si une colonne est manquante ou mal nommée).
 
-### `HEAD`
+### `181316c`
 
 > J’ai constitué quelques fichiers CSV de test de situations problématiques ou non.
 >
 > Ensuite, j’ai modifié ma méthode `ImportCSV` pour éviter d’ajouter des personnes déjà existantes dans la base en utilisant leur adresse e-mail comme attribut unique. Je pense qu’en utilisant quelque-chose comme un `HashSet<Person>`, il aurait été possible de s’éviter du LINQ qui pourrait prendre un peu de temps sur un éventuel import massif.
 >
 > Il pourrait aussi être possible, si besoin, de mettre à jour les personnes déjà existantes plutôt que de simplement les ignorer.
+
+### `HEAD`
+
+> J’ai voulu mettre des tests en place. Pour cela, j’ai gardé le classique `XUnit` déjà installé dans le squelette de projet, mais aussi rajouté `Bogus` pour générer des données aléatoires à insérer en base pendant les tests, et `Microsoft.EntityFrameworkCore.InMemory` pour pouvoir gérer la base de données plus facilement pendant les tests (et nous éviter de devoir gérer une autre base SQLite pour les tests).
+>
+> Je n’ai eu le temps que pour le test de l’ajout et de la mise à jour d’entités. J’aurais pu faire plus mais j’avais déjà pris un peu trop de temps à mon goût.

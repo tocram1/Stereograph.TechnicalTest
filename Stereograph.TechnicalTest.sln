@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stereograph.TechnicalTest.Api", "Stereograph.TechnicalTest.Api\Stereograph.TechnicalTest.Api.csproj", "{B8633845-522C-4381-BBA6-5BE1527B45CE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stereograph.TechnicalTest.Tests", "Stereograph.TechnicalTest.Tests\Stereograph.TechnicalTest.Tests.csproj", "{6DF89681-8BAC-4D98-9BAB-083D098405F1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B8633845-522C-4381-BBA6-5BE1527B45CE} = {B8633845-522C-4381-BBA6-5BE1527B45CE}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
